@@ -6,11 +6,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 导入组件
-import login from './components/login.vue'
+// import login from './components/login.vue'
 import index from './components/index.vue'
 
 //嵌套路由
-import users from './components/users.vue'
+// import users from './components/users.vue'
 import roles from './components/roles.vue'
 import rights from './components/rights.vue'
 import goods from './components/goods.vue'
@@ -27,18 +27,18 @@ import goodsList from './components/goodsList.vue'
 const routes = [
   {
       path:"/login",
-      component:login
+      component:()=>import(/* webpackChunkName: "login" */ './components/login.vue')
   },
   {
     path:"/",  
-    component:index,
+    component:()=>import(/* webpackChunkName: "index" */ './components/index.vue'),
     children: [
       {path:"/",
       redirect:"/users"
       },
       {
         path: 'users', // 匹配的规则是 /users
-        component: users
+        component: ()=>import(/* webpackChunkName: "users" */ './components/users.vue')
       },
       {
         path: 'roles', // 匹配的规则是 /roles
